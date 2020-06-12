@@ -14,8 +14,7 @@ import io.prometheus.client.exporter.MetricsServlet;
 @SpringBootApplication
 @RestController
 public class Application {
-    static final Counter requests = Counter.build()
-            .name("http_requests").help("Total requests.").register();
+    static final Counter requests = Counter.build().name("http_requests_total").help("Total requests").register();
 
     @RequestMapping("/hello")
     public String hello() {
@@ -34,7 +33,7 @@ public class Application {
     }
 
     @Bean
-    public ServletRegistrationBean servletRegistrationBean() {
-        return new ServletRegistrationBean(new MetricsServlet(), "/metrics");
+    public ServletRegistrationBean<MetricsServlet> servletRegistrationBean() {
+        return new ServletRegistrationBean<>(new MetricsServlet(), "/metrics");
     }
 }
