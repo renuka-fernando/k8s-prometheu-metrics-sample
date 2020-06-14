@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.renuka.k8s</groupId>
-    <artifactId>k8s-prometheu-metrics-sample</artifactId>
+    <artifactId>prometheus-metrics-app-java</artifactId>
     <version>1.0.0</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.0.RELEASE</version>
+        <version>2.3.1.RELEASE</version>
     </parent>
 
     <properties>
@@ -28,31 +28,25 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>io.prometheus</groupId>
-            <artifactId>simpleclient</artifactId>
-            <version>0.9.0</version>
-        </dependency>
-        <!-- Hotspot JVM metrics-->
+        <!-- https://mvnrepository.com/artifact/io.prometheus/simpleclient_hotspot -->
         <dependency>
             <groupId>io.prometheus</groupId>
             <artifactId>simpleclient_hotspot</artifactId>
             <version>0.9.0</version>
         </dependency>
-        <!-- Exposition HTTPServer-->
-        <dependency>
-            <groupId>io.prometheus</groupId>
-            <artifactId>simpleclient_httpserver</artifactId>
-            <version>0.9.0</version>
-        </dependency>
-        <!-- Pushgateway exposition-->
+        <!-- https://mvnrepository.com/artifact/io.prometheus/simpleclient_servlet -->
         <dependency>
             <groupId>io.prometheus</groupId>
             <artifactId>simpleclient_servlet</artifactId>
             <version>0.9.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.prometheus/simpleclient_httpserver -->
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>simpleclient_httpserver</artifactId>
+            <version>0.9.0</version>
+        </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
@@ -62,5 +56,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
