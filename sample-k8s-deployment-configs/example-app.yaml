@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example-app
+  template:
+    metadata:
+      labels:
+        app: example-app
+    spec:
+      containers:
+      - name: example-app
+        image: renukafernando/k8s-prometheu-metrics-sample:v1.1.0
+        livenessProbe:
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          tcpSocket:
+            port: 8080
+        ports:
+        - name: web
+          containerPort: 8080
+          protocol: "TCP"
