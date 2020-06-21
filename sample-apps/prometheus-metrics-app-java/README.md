@@ -22,18 +22,32 @@ Sample payload of **Product** for methods POST and PUT methods.
 
 ### 1.3. Sample Requests
 Sample requests for testing products service.
-```sh
-$ curl -X GET "http://localhost:8080/products"
-$ curl -X GET "http://localhost:8080/products?category=Electronics&lower-than=500&higher-than=300"
-$ curl -X GET "http://localhost:8080/products/101"
-$ curl -X POST -H "Content-Type: application/json" \
-    -d '{"name":"XYZ Smart Phone", "category":"Electronics", "price": "$199.99"}' \
-    "http://localhost:8080/products"
-$ curl -X PUT -H "Content-Type: application/json" \
-    -d '{"name":"XYZ Smart Phone 20Plus", "category":"Electronics", "price": "$199.99"}' \
-    "http://localhost:8080/products/106"
-$ curl -X DELETE "http://localhost:8080/products/106"
-```
+- Search and get products
+    ```sh
+    $ curl -X GET "http://localhost:8080/products"
+  
+    $ curl -X GET "http://localhost:8080/products?category=Electronics&lower-than=500&higher-than=300"
+  
+    $ curl -X GET "http://localhost:8080/products/101"
+    ```
+- Add product
+    ```sh
+    $ curl -X POST -H "Content-Type: application/json" \
+        -d '{"name":"XYZ Smart Phone", "category":"Electronics", "price": "$199.99"}' \
+        "http://localhost:8080/products"
+    ```
+
+- Update product
+    ```sh
+    $ curl -X PUT -H "Content-Type: application/json" \
+        -d '{"name":"XYZ Smart Phone 20Plus", "category":"Electronics", "price": "$199.99"}' \
+        "http://localhost:8080/products/106"
+    ```
+
+- Delete product
+    ```sh
+    $ curl -X DELETE "http://localhost:8080/products/106"
+    ```
 
 ### 1.4. Get Prometheus Metrics
 Get metrics by calling the resource `/metrics` after making some [sample requests](#13-sample-requests).
