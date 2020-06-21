@@ -1,5 +1,7 @@
 # Prometheus Metrics Sample Application - Spring Boot
 
+Docker Image: [renukafernando/k8s-prometheu-metrics-sample](https://hub.docker.com/repository/docker/renukafernando/k8s-prometheu-metrics-sample)
+
 ## 1. Test Application in Local
 
 ### 1.1 Run Application
@@ -32,7 +34,26 @@ $ curl -X PUT -H "Content-Type: application/json" \
 $ curl -X DELETE http://localhost:8080/products/106
 ```
 
-### 1.4. Sample Response
+### 1.4. Get Prometheus Metrics
+Get metrics by calling the resource `/metrics` after making some [sample requests](#13-sample-requests).
+```sh
+$ curl -X GET http://localhost:8080/metrics
+```
+
+Sample Response
+```log
+# HELP products_http_requests_total products: total http requests
+# TYPE products_http_requests_total counter
+products_http_requests_total{method="GET",resource="/products/count",priority="LOW",} 3.0
+products_http_requests_total{method="GET",resource="/products",priority="HIGH",} 2.0
+products_http_requests_total{method="GET",resource="/products/$id",priority="HIGH",} 3.0
+products_http_requests_total{method="PUT",resource="/products/$id",priority="LOW",} 3.0
+products_http_requests_total{method="DELETE",resource="/products/$id",priority="LOW",} 3.0
+products_http_requests_total{method="POST",resource="/products",priority="HIGH",} 3.0
+products_http_requests_total{method="",resource="",priority="",} 1.0
+```
+
+### 1.5. Sample Response
 Sample response of products list.
 ```json
 [
