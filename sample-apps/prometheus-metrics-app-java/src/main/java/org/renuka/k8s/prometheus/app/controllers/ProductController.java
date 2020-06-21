@@ -20,8 +20,13 @@ import java.util.Map;
 @RestController
 public class ProductController {
     // metrics: total request counter
-    private static final Counter reqCount = Counter.build().name("hello_http_requests_total")
-            .labelNames("method", "priority").help("hello: total http requests").register();
+    private static final Counter reqCount = Counter.build().name("products_http_requests_total")
+            .labelNames("method", "priority").help("products: total http requests").register();
+
+    static {
+        // increase request count for exposing metric name to prometheus
+        reqCount.labels("", "").inc();
+    }
 
     // products
     private static Map<Integer, Product> products = new HashMap<Integer, Product>();
