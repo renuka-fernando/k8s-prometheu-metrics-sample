@@ -8,7 +8,7 @@
 - [Deploy Sample Products Backend Service](sample-apps/prometheus-metrics-app-java/k8s-configs)
 
 ## Test Sample
-- Lets make `IP` as the external IP of the LB service and `PERIOD` as waiting period in seconds to send requests
+- Lets make `IP` as the node IP and `PERIOD` as waiting period in seconds to send requests
 periodically.
     ```sh
     $ IP=<EXTERNAL_IP_OF_LB_SERVICE>
@@ -21,7 +21,7 @@ periodically.
     while true; do
       printf "\nREQUST: %s and SLEEP %s seconds ------------------------------------------------\n" ${i} ${PERIOD};
       i=$((i+1)) ;
-      curl -X GET "https://${IP}:9095/prodapi/v1/products" -k & sleep ${PERIOD};
+      curl -X GET "http://${IP}:30100/products" & sleep ${PERIOD};
     done
     ```
     Wait for 2-3 minutes and open a new terminal and execute following to get HPA details.
