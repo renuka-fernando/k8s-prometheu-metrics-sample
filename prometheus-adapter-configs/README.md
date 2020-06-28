@@ -2,7 +2,7 @@
 
 - Create namespace `custom-metrics`.
     ```sh
-    $ apictl create namespace custom-metrics
+    $ kubectl create namespace custom-metrics
   
     Output:
     namespace/custom-metrics created
@@ -10,7 +10,7 @@
 - Create service certificate. Follow [Serving Certificates, Authentication, and Authorization](https://github.com/kubernetes-sigs/apiserver-builder-alpha/blob/v1.18.0/docs/concepts/auth.md)
 to create serving certificate. For this sample we can use certs in the directory `prometheus-adapter/certs`. Create secret `cm-adapter-serving-certs` as follows.
     ```sh
-    $ apictl create secret generic cm-adapter-serving-certs \
+    $ kubectl create secret generic cm-adapter-serving-certs \
             --from-file=serving-ca.crt=certs/serving-ca.crt \
             --from-file=serving-ca.key=certs/serving-ca.key \
             -n custom-metrics
@@ -21,7 +21,7 @@ to create serving certificate. For this sample we can use certs in the directory
 
 - Install Prometheus Adapter (version 0.7.0 for this sample) in Kubernetes cluster.
     ```sh
-    $ apictl apply -f .
+    $ kubectl apply -f .
   
     Output:
     clusterrolebinding.rbac.authorization.k8s.io/custom-metrics:system:auth-delegator created
@@ -53,7 +53,7 @@ to create serving certificate. For this sample we can use certs in the directory
     
 - Test the Prometheus Adapter deployment executing follows.
     ```sh
-    $ apictl get --raw /apis/custom.metrics.k8s.io/v1beta1
+    $ kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1
   
     Output:
     {"kind":"APIResourceList","apiVersion":"v1","groupVersion":"custom.metrics.k8s.io/v1beta1","resources":[]}

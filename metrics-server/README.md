@@ -14,7 +14,7 @@ $ minikube addons enable metrics-server
     **NOTE:** This installation only required in local setup, if you using GKE, EKS cluster you do not need to install
     following.
     ```sh
-    $ apictl apply -f metrics-server-components-0.3.6.yaml
+    $ kubectl apply -f metrics-server-components-0.3.6.yaml
   
     Output:
     clusterrole.rbac.authorization.k8s.io/system:aggregated-metrics-reader created
