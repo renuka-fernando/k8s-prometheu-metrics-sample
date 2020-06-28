@@ -18,5 +18,10 @@ spec:
       containers:
       - name: custom-metrics-apiserver
         image: renukafernando/k8s-prometheu-metrics-sample:v1.0.0
+        resources:
+          limits:
+            cpu: "500m"
+          requests:
+            cpu: "300m"
         ports:
         - containerPort: 8080

@@ -4,6 +4,11 @@
 them in Kubernetes apiserver through [Metrics API](https://github.com/kubernetes/metrics)
 for use by Horizontal Pod Autoscaler and Vertical Pod Autoscaler
 
+If you are running Minikube, run the following command to enable metrics-server.
+```sh
+$ minikube addons enable metrics-server
+```
+
 - Install Metrics Server
 
     **NOTE:** This installation only required in local setup, if you using GKE, EKS cluster you do not need to install

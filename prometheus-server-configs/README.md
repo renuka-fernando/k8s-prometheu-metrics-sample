@@ -29,6 +29,5 @@
     clusterrole.rbac.authorization.k8s.io/prometheus created
     clusterrolebinding.rbac.authorization.k8s.io/prometheus created
     servicemonitor.monitoring.coreos.com/products-backend created
-    servicemonitor.monitoring.coreos.com/products-mgw created
     service/prometheus created
     ```

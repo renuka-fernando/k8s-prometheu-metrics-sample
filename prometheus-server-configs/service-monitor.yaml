@@ -9,4 +9,4 @@ spec:
     matchLabels:
       app: products-backend
   endpoints:
-  - port: http-products
+  - port: products
