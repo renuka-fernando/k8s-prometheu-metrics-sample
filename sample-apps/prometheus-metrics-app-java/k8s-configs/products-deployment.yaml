@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: products-backend
+  name: products-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: products-backend
+  template:
+    metadata:
+      labels:
+        app: products-backend
+      name: products-backend
+    spec:
+      containers:
+      - name: custom-metrics-apiserver
+        image: renukafernando/k8s-prometheu-metrics-sample:v1.0.0
+        ports:
+        - containerPort: 8080

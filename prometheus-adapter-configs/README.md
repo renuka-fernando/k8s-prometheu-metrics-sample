@@ -11,8 +11,8 @@
 to create serving certificate. For this sample we can use certs in the directory `prometheus-adapter/certs`. Create secret `cm-adapter-serving-certs` as follows.
     ```sh
     $ apictl create secret generic cm-adapter-serving-certs \
-            --from-file=serving-ca.crt=prometheus-adapter/certs/serving-ca.crt \
-            --from-file=serving-ca.key=prometheus-adapter/certs/serving-ca.key \
+            --from-file=serving-ca.crt=certs/serving-ca.crt \
+            --from-file=serving-ca.key=certs/serving-ca.key \
             -n custom-metrics
     
     Output:
@@ -21,7 +21,7 @@ to create serving certificate. For this sample we can use certs in the directory
 
 - Install Prometheus Adapter (version 0.7.0 for this sample) in Kubernetes cluster.
     ```sh
-    $ apictl apply -f prometheus-adapter/
+    $ apictl apply -f .
   
     Output:
     clusterrolebinding.rbac.authorization.k8s.io/custom-metrics:system:auth-delegator created
@@ -51,18 +51,6 @@ to create serving certificate. For this sample we can use certs in the directory
         as: "${1}_http_requests_total_per_second"
       metricsQuery: 'sum(rate(<<.Series>>{<<.LabelMatchers>>,http_url!=""}[1m])) by (<<.GroupBy>>)'
     
-    # rule for managed API (micro-gateway)
-    - seriesQuery: '{__name__="http_requests_total_value"}'
-      resources:
-        overrides:
-          namespace: {resource: "namespace"}
-          pod: {resource: "pod"}
-      name:
-        matches: "http_requests_total_value"
-        as: "http_requests_total_value_per_second"
-      metricsQuery: 'sum(rate(<<.Series>>{<<.LabelMatchers>>,http_url!~"(/health|/metrics)"}[1m])) by (<<.GroupBy>>)'
-    ```
-
 - Test the Prometheus Adapter deployment executing follows.
     ```sh
     $ apictl get --raw /apis/custom.metrics.k8s.io/v1beta1
