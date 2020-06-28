@@ -57,15 +57,20 @@ $ curl -X GET http://localhost:8080/metrics
 
 Sample Response
 ```log
-# HELP products_http_requests_total products: total http requests
+# HELP products_http_requests_total Products: Total http requests
 # TYPE products_http_requests_total counter
-products_http_requests_total{http_method="GET",http_url="/products/count",priority="LOW",} 3.0
-products_http_requests_total{http_method="GET",http_url="/products",priority="HIGH",} 2.0
-products_http_requests_total{http_method="GET",http_url="/products/$id",priority="HIGH",} 3.0
+products_http_requests_total{http_method="GET",http_url="/products",priority="HIGH",} 19.0
 products_http_requests_total{http_method="PUT",http_url="/products/$id",priority="LOW",} 3.0
-products_http_requests_total{http_method="DELETE",http_url="/products/$id",priority="LOW",} 3.0
-products_http_requests_total{http_method="POST",http_url="/products",priority="HIGH",} 3.0
-products_http_requests_total{http_method="",http_url="",priority="",} 1.0
+products_http_requests_total{http_method="GET",http_url="/products/$id",priority="HIGH",} 2.0
+products_http_requests_total{http_method="DELETE",http_url="/products/$id",priority="LOW",} 1.0
+products_http_requests_total{http_method="POST",http_url="/products",priority="HIGH",} 4.0
+products_http_requests_total{http_method="",http_url="",priority="",} 0.0
+# HELP products_requests_latency_seconds Products: Request latency in seconds.
+# TYPE products_requests_latency_seconds summary
+products_requests_latency_seconds_count{http_method="GET",http_url="/products",priority="HIGH",} 19.0
+products_requests_latency_seconds_sum{http_method="GET",http_url="/products",priority="HIGH",} 0.007540193000000001
+products_requests_latency_seconds_count{http_method="",http_url="",priority="",} 1.0
+products_requests_latency_seconds_sum{http_method="",http_url="",priority="",} 0.0
 ```
 
 ### 1.5. Sample Response
@@ -111,3 +116,7 @@ Rename `IMAGE_NAME` and `VERSION` in the script `build.sh` and execute the scrip
 ```sh
 $ ./build.sh
 ```
+
+## 3. Deploy in Kubernetes
+
+Follow

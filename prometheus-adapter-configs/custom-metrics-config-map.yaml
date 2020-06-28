@@ -6,22 +6,14 @@ metadata:
 data:
   config.yaml: |
     rules:
-    - seriesQuery: '{__name__=~".*_http_requests_total",namespace!="",pod!="",method!="",priority="HIGH"}'
+
+    # rule for products backend service
+    - seriesQuery: '{__name__=~"^.*_http_requests_total"}'
       resources:
         overrides:
           namespace: {resource: "namespace"}
           pod: {resource: "pod"}
       name:
         matches: "^(.*)_http_requests_total"
-        as: "${1}_high_priority_http_requests_per_second"
-      metricsQuery: 'sum(rate(<<.Series>>{<<.LabelMatchers>>,priority="HIGH"}[1m])) by (<<.GroupBy>>)'
-    - seriesQuery: '{__name__=~".*_http_requests_total",namespace!="",pod!="",method!="",priority!=""}'
-      resources:
-        overrides:
-          namespace: {resource: "namespace"}
-          pod: {resource: "pod"}
-      name:
-        matches: "^(.*)_http_requests_total"
-        as: "${1}_http_requests_per_second"
-      metricsQuery: 'sum(rate(<<.Series>>{<<.LabelMatchers>>}[1m])) by (<<.GroupBy>>)'
-    
+        as: "${1}_http_requests_total_per_second"
+      metricsQuery: 'sum(rate(<<.Series>>{<<.LabelMatchers>>,http_url!=""}[1m])) by (<<.GroupBy>>)'
