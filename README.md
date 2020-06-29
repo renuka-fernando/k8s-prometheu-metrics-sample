@@ -9,6 +9,7 @@
     $ minikube addons enable metrics-server
     ```
     OR else
+    
     **NOTE:** This installation only required in local setup, if you using GKE, EKS cluster you do not need to install
     following.
     ```sh
@@ -59,6 +60,9 @@
         servicemonitor.monitoring.coreos.com/products-backend created
         service/prometheus created
         ```
+      
+    - Test the Prometheus deployment by visiting the url `http://<NODE-IP>:30900/graph`.
+      ![Prometheus Dashboard](images/prometheus-dashboard.png)
 1. [Install Prometheus Adapter](prometheus-adapter-configs)
 
     - Create namespace `custom-metrics`.
@@ -136,7 +140,7 @@
 - Lets make `IP` as the node IP and `PERIOD` as waiting period in seconds to send requests
 periodically.
     ```sh
-    $ IP=<EXTERNAL_IP_OF_LB_SERVICE>
+    $ IP=<NODE_IP>
     PERIOD=5
     ```
     Send requests periodically.
