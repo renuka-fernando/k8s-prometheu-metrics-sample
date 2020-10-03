@@ -1,5 +1,5 @@
 #!/bin/bash
-IMAGE_NAME=renukafernando/k8s-prometheu-metrics-sample
+IMAGE_NAME=renukafernando/k8s-prometheu-metrics-order-sample
 VERSION=v1.0.0
 
 mvn clean package;

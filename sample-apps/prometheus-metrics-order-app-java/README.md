@@ -10,13 +10,15 @@ Execute following to run the application
 $ mvn spring-boot:run
 ```
 
-### 1.2. Sample `Product` Payload
-Sample payload of **Product** for methods POST and PUT methods.
+### 1.2. Sample `Order` Payload
+Sample payload of **Order** for methods POST and PUT methods.
 ```json
 {
-	"name": "XYZ Smart Phone",
-	"category": "Electronics",
-	"price": 199.99
+    "productId": 101,
+    "quantity": 1.0,
+    "shipDate": "2020-10-03T11:35:10.492+00:00",
+    "status": "placed",
+    "completed": false
 }
 ```
 
@@ -26,27 +28,39 @@ Sample requests for testing products service.
     ```sh
     $ curl -X GET "http://localhost:8080/orders"
   
-    $ curl -X GET "http://localhost:8080/products?category=Electronics&lower-than=500&higher-than=300"
+    $ curl -X GET "http://localhost:8080/orders?productId=101&completed=false"
   
-    $ curl -X GET "http://localhost:8080/products/101"
+    $ curl -X GET "http://localhost:8080/orders/13"
     ```
 - Add product
     ```sh
     $ curl -X POST -H "Content-Type: application/json" \
-        -d '{"name":"XYZ Smart Phone", "category":"Electronics", "price": "$199.99"}' \
-        "http://localhost:8080/products"
+        -d '{
+                "productId":102,
+                "quantity":5.0,
+                "shipDate":"2020-10-03T08:47:09.373+00:00",
+                "status":"delivered",
+                "completed":true
+            }' \
+        "http://localhost:8080/orders"
     ```
 
 - Update product
     ```sh
     $ curl -X PUT -H "Content-Type: application/json" \
-        -d '{"name":"XYZ Smart Phone 20Plus", "category":"Electronics", "price": "$199.99"}' \
+        -d '{
+                "productId":102,
+                "quantity":2.0,
+                "shipDate":"2020-10-03T08:47:09.373+00:00",
+                "status":"delivered",
+                "completed":false
+            }' \
         "http://localhost:8080/products/106"
     ```
 
 - Delete product
     ```sh
-    $ curl -X DELETE "http://localhost:8080/products/106"
+    $ curl -X DELETE "http://localhost:8080/orders/106"
     ```
 
 ### 1.4. Get Prometheus Metrics
@@ -78,34 +92,44 @@ Sample response of products list.
 ```json
 [
     {
+        "orderId": 11,
         "productId": 101,
-        "name": "Apples",
-        "category": "Food",
-        "price": 1.49
+        "quantity": 2.0,
+        "shipDate": "2020-10-03T11:33:49.373+00:00",
+        "status": "placed",
+        "completed": true
     },
     {
+        "orderId": 12,
+        "productId": 101,
+        "quantity": 1.0,
+        "shipDate": "2020-10-03T11:35:10.492+00:00",
+        "status": "placed",
+        "completed": false
+    },
+    {
+        "orderId": 13,
         "productId": 102,
-        "name": "Macaroni & Cheese",
-        "category": "Food",
-        "price": 7.69
+        "quantity": 5.0,
+        "shipDate": "2020-10-03T08:47:09.373+00:00",
+        "status": "delivered",
+        "completed": true
     },
     {
+        "orderId": 14,
         "productId": 102,
-        "name": "ABC Smart TV",
-        "category": "Electronics",
-        "price": 399.99
+        "quantity": 1.0,
+        "shipDate": "2020-09-30T00:13:49.373+00:00",
+        "status": "delivered",
+        "completed": false
     },
     {
-        "productId": 104,
-        "name": "Motor Oil",
-        "category": "Automobile",
-        "price": 22.88
-    },
-    {
-        "productId": 105,
-        "name": "Floral Sleeveless Blouse",
-        "category": "Clothing",
-        "price": 21.5
+        "orderId": 15,
+        "productId": 102,
+        "quantity": 2.0,
+        "shipDate": "2020-10-04T01:27:09.373+00:00",
+        "status": "placed",
+        "completed": true
     }
 ]
 ```

@@ -5,15 +5,15 @@ import java.util.Date;
 public class Order {
     Integer orderId;
     Integer productId;
-    Double quanity;
+    Double quantity;
     Date shipDate;
     String status;
     Boolean completed;
 
-    public Order(Integer orderId, Integer productId, Double quanity, Date shipDate, String status, Boolean completed) {
+    public Order(Integer orderId, Integer productId, Double quantity, Date shipDate, String status, Boolean completed) {
         this.orderId = orderId;
         this.productId = productId;
-        this.quanity = quanity;
+        this.quantity = quantity;
         this.shipDate = shipDate;
         this.status = status;
         this.completed = completed;
@@ -35,12 +35,12 @@ public class Order {
         this.productId = productId;
     }
 
-    public Double getQuanity() {
-        return quanity;
+    public Double getQuantity() {
+        return quantity;
     }
 
-    public void setQuanity(Double quanity) {
-        this.quanity = quanity;
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
     }
 
     public Date getShipDate() {

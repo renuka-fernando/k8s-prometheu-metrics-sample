@@ -34,9 +34,9 @@ public class OrderController {
     static {
         orders.put(11, new Order(11, 101, 2.0, new Date(1601724829373L), "placed", true));
         orders.put(12, new Order(12, 101, 1.0, new Date(1601724910492L), "placed", false));
-        orders.put(13, new Order(13, 101, 5.0, new Date(1601714829373L), "delivered", true));
-        orders.put(14, new Order(14, 101, 1.0, new Date(1601424829373L), "delivered", false));
-        orders.put(15, new Order(15, 101, 2.0, new Date(1601774829373L), "placed", true));
+        orders.put(13, new Order(13, 102, 5.0, new Date(1601714829373L), "delivered", true));
+        orders.put(14, new Order(14, 102, 1.0, new Date(1601424829373L), "delivered", false));
+        orders.put(15, new Order(15, 102, 2.0, new Date(1601774829373L), "placed", true));
     }
 
     @GetMapping("/orders/{orderId}")
