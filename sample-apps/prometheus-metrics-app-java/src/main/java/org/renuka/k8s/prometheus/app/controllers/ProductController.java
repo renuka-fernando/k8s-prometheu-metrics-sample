@@ -24,9 +24,9 @@ import java.util.stream.Stream;
 @RestController
 public class ProductController {
     // metrics: total request counter
-    private static final Counter requestCount = Counter.build().name("products_http_requests_total")
+    private static final Counter requestCount = Counter.build().name("backend_http_requests_total")
             .labelNames("http_method", "http_url", "priority").help("Products: Total http requests").register();
-    private static final Summary requestLatency = Summary.build().name("products_requests_latency_seconds")
+    private static final Summary requestLatency = Summary.build().name("backend_requests_latency_seconds")
             .labelNames("http_method", "http_url", "priority").help("Products: Request latency in seconds.").register();
 
     static {
