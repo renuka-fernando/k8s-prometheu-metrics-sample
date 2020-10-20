@@ -4,6 +4,28 @@ Docker Image: [renukafernando/k8s-prometheu-metrics-sample](https://hub.docker.c
 
 ## 1. Test Application in Local
 
+Create TLS certs and keystore.
+```sh
+# DOMAIN=ingress.foo.com
+DOMAIN=localhost
+openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:4096 \
+    -keyout key.pem \
+    -out cert.pem \
+    -subj "/CN=${DOMAIN}/O=${DOMAIN}"
+
+openssl pkcs12 -export \
+    -out keystore.p12 \
+    -in cert.pem \
+    -inkey key.pem \
+    -passout pass:admin1234
+```
+
+Set environment variables
+```sh
+export KEYSTORE_PATH=path/to/keystore.p12
+export KEYSTORE_PASSWORD=admin1234
+```
+
 ### 1.1 Run Application
 Execute following to run the application
 ```sh
@@ -21,6 +43,12 @@ Sample payload of **Product** for methods POST and PUT methods.
 ```
 
 ### 1.3. Sample Requests
+
+Following are samples for HTTP to use HTTPS invoke them as follos.
+```sh
+curl -X GET "https://localhost:8443/products" --cacert cert.pem
+```
+
 Sample requests for testing products service.
 - Search and get products
     ```sh
